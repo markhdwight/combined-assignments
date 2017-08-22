@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.Arrays;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -24,7 +26,23 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	
+    	if(i < 0)
+    		throw new IllegalArgumentException();
+    	else if(i == 0 || i == 1)
+    		return 1;
+    	else
+    	{
+    		//int num = 2;
+    		int[] seq = {1,1};
+    		for(int k = 1; k < i; k++)
+    		{
+    			seq = Arrays.copyOf(seq, seq.length+1);
+    			seq[seq.length-1] = seq[seq.length-3] + seq[seq.length-2];
+    		}
+    		return seq[i];
+    	}
+    	
     }
 
     /**
@@ -38,7 +56,18 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+
+    	if(end < start || end < 0)
+    		throw new IllegalArgumentException();
+    	
+    	int[] sliceNums = new int[end-start];
+    	
+    	for(int k = 0; k<end-start; k++)
+    	{
+    		sliceNums[k] = atIndex(start+k);
+    	}
+    	
+    	return sliceNums;
     }
 
     /**
@@ -49,6 +78,17 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
+
+    	if(count<0)
+    		throw new IllegalArgumentException();
+    	
+    	int[] fib = new int[count];
+    	
+    	for(int j = 0; j<count; j++)
+    	{
+    		fib[j] = atIndex(j);
+    	}
+    	
+    	return fib;
     }
 }
