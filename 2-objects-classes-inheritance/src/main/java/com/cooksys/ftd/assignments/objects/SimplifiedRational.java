@@ -16,7 +16,7 @@ public class SimplifiedRational implements IRational {
 	private int denominator;
 	
     public static int gcd(int a, int b) throws IllegalArgumentException {
-        //throw new NotImplementedException();
+
     	if( a <= 0 || b < 0)
     		throw new IllegalArgumentException();
     	
@@ -40,7 +40,7 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public static int[] simplify(int numerator, int denominator) throws IllegalArgumentException {
-        //throw new NotImplementedException();
+
         int[] simple = new int[2];
         int gcd;
     	
@@ -68,7 +68,7 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
-        //throw new NotImplementedException();
+
     	if(denominator == 0)
     		throw new IllegalArgumentException();
     	
@@ -91,7 +91,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getNumerator() {
-        //throw new NotImplementedException();
+
     	return numerator;
     }
 
@@ -100,7 +100,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getDenominator() {
-        //throw new NotImplementedException();
+
         return denominator;
     }
 
@@ -117,7 +117,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public SimplifiedRational construct(int numerator, int denominator) throws IllegalArgumentException {
-        //throw new NotImplementedException();
+
     	if(denominator == 0)
     		throw new IllegalArgumentException();
     	return new SimplifiedRational(numerator,denominator);
@@ -131,7 +131,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        //throw new NotImplementedException();
+
     	if(obj instanceof SimplifiedRational)
     	{
     		if(this.getNumerator()==(((SimplifiedRational) obj).getNumerator()))
@@ -152,7 +152,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public String toString() {
-        //throw new NotImplementedException();
+
     	int tempN = this.numerator;
     	int tempD = this.denominator;
     	String tempS = "";
