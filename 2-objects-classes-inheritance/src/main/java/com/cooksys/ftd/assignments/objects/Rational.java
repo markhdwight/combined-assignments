@@ -14,8 +14,15 @@ public class Rational implements IRational {
      * @param denominator the denominator of the rational value
      * @throws IllegalArgumentException if the given denominator is 0
      */
+	
+	private int numerator,denominator;
+	
     public Rational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	if(denominator == 0)
+    		throw new IllegalArgumentException();
+    	this.numerator = numerator;
+    	this.denominator = denominator;
     }
 
     /**
@@ -23,7 +30,8 @@ public class Rational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	return numerator;
     }
 
     /**
@@ -31,7 +39,8 @@ public class Rational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	return denominator;
     }
 
     /**
@@ -47,7 +56,10 @@ public class Rational implements IRational {
      */
     @Override
     public Rational construct(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	if(denominator == 0)
+    		throw new IllegalArgumentException();
+    	return new Rational(numerator,denominator);
     }
 
     /**
@@ -58,7 +70,16 @@ public class Rational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	if(obj instanceof Rational)
+    	{
+    		if(this.getNumerator()==(((Rational) obj).getNumerator()))
+    		{
+    			if(this.getDenominator()==(((Rational) obj).getDenominator()))
+    				return true;
+    		}
+    	}
+    	return false;
     }
 
     /**
@@ -70,6 +91,18 @@ public class Rational implements IRational {
      */
     @Override
     public String toString() {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	int tempN = this.numerator;
+    	int tempD = this.denominator;
+    	String tempS = "";
+    	
+    	if(tempN < 0 ^ tempD < 0)	//XOR
+    	{
+    		tempS+= "-";
+    	}
+    	
+    	tempS+= Math.abs(tempN) + "/" + Math.abs(tempD);
+    	
+    	return tempS;
     }
 }

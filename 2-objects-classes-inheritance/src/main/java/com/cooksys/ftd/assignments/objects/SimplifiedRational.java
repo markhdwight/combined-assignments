@@ -11,8 +11,19 @@ public class SimplifiedRational implements IRational {
      * @return the greatest common denominator, or shared factor, of `a` and `b`
      * @throws IllegalArgumentException if a <= 0 or b < 0
      */
+	
+	private int numerator;
+	private int denominator;
+	
     public static int gcd(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	if( a <= 0 || b < 0)
+    		throw new IllegalArgumentException();
+    	
+    	if(b == 0)
+    		return a;
+    	else return gcd(b,a%b);
+    	
     }
 
     /**
@@ -29,7 +40,19 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public static int[] simplify(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        int[] simple = new int[2];
+        int gcd;
+    	
+        if(denominator == 0)
+        	throw new IllegalArgumentException();
+        
+        gcd = gcd(Math.abs(numerator),Math.abs(denominator));
+        
+        simple[0] = numerator / gcd;
+        simple[1] = denominator / gcd;
+        
+        return simple;
     }
 
     /**
@@ -45,7 +68,22 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	if(denominator == 0)
+    		throw new IllegalArgumentException();
+    	
+    	if(numerator == 0)	//no further simplification to be done
+    	{
+    		this.numerator = numerator;
+    		this.denominator = denominator;
+    	}
+    	else
+    	{
+    		int[] simple = simplify(numerator,denominator);
+    		this.numerator = simple[0];
+    		this.denominator = simple[1];
+    	}
+    	
     }
 
     /**
@@ -53,7 +91,8 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	return numerator;
     }
 
     /**
@@ -61,7 +100,8 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        return denominator;
     }
 
     /**
@@ -77,7 +117,10 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public SimplifiedRational construct(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	if(denominator == 0)
+    		throw new IllegalArgumentException();
+    	return new SimplifiedRational(numerator,denominator);
     }
 
     /**
@@ -88,7 +131,16 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	if(obj instanceof SimplifiedRational)
+    	{
+    		if(this.getNumerator()==(((SimplifiedRational) obj).getNumerator()))
+    		{
+    			if(this.getDenominator()==(((SimplifiedRational) obj).getDenominator()))
+    				return true;
+    		}
+    	}
+    	return false;
     }
 
     /**
@@ -100,6 +152,18 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public String toString() {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	int tempN = this.numerator;
+    	int tempD = this.denominator;
+    	String tempS = "";
+    	
+    	if(tempN < 0 ^ tempD < 0)	//XOR
+    	{
+    		tempS+= "-";
+    	}
+    	
+    	tempS+= Math.abs(tempN) + "/" + Math.abs(tempD);
+    	
+    	return tempS;
     }
 }
