@@ -27,7 +27,8 @@ public class FizzBuzz {
      * @return `true` if a is evenly divisible by b, `false` otherwise
      * @throws IllegalArgumentException if b is zero
      */
-    public static boolean divides(int a, int b) throws IllegalArgumentException {
+    public static boolean divides(int a, int b) throws IllegalArgumentException 
+    {
     	
     	if(b == 0)
     		throw new IllegalArgumentException();
@@ -45,7 +46,8 @@ public class FizzBuzz {
      * @param n the number to generate a message for
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
-    public static String message(int n) {
+    public static String message(int n) 
+    {
     	
     	String temp = "";
     	
@@ -76,7 +78,8 @@ public class FizzBuzz {
      * @return an array of divisibility messages
      * @throws IllegalArgumentException if the given end is less than the given start
      */
-    public static String[] messages(int start, int end) throws IllegalArgumentException {
+    public static String[] messages(int start, int end) throws IllegalArgumentException 
+    {
     	
     	if(end < start)
     		throw new IllegalArgumentException();
@@ -103,7 +106,8 @@ public class FizzBuzz {
      * For this main method, iterate over the numbers 1 through 115 and print
      * the relevant messages to sysout
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         
     	System.out.println(messages(1,116));
     }

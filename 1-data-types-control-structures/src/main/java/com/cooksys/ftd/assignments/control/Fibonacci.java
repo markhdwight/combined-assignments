@@ -25,7 +25,8 @@ public class Fibonacci {
      * @return the calculated element
      * @throws IllegalArgumentException if the given index is less than zero
      */
-    public static int atIndex(int i) throws IllegalArgumentException {
+    public static int atIndex(int i) throws IllegalArgumentException 
+    {
     	
     	if(i < 0)
     		throw new IllegalArgumentException();
@@ -55,7 +56,8 @@ public class Fibonacci {
      * @throws IllegalArgumentException if either the given start or end is negative, or if the
      *                                  given end is less than the given start
      */
-    public static int[] slice(int start, int end) throws IllegalArgumentException {
+    public static int[] slice(int start, int end) throws IllegalArgumentException 
+    {
 
     	if(end < start || end < 0)
     		throw new IllegalArgumentException();
@@ -77,7 +79,8 @@ public class Fibonacci {
      * @return the beginning of the fibonacci sequence, up to the given count, as an array of int elements
      * @throws IllegalArgumentException if the given count is negative
      */
-    public static int[] fibonacci(int count) throws IllegalArgumentException {
+    public static int[] fibonacci(int count) throws IllegalArgumentException 
+    {
 
     	if(count<0)
     		throw new IllegalArgumentException();
