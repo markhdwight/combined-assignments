@@ -25,6 +25,9 @@ public class Fibonacci {
      * @return the calculated element
      * @throws IllegalArgumentException if the given index is less than zero
      */
+	
+	private static int[] sequence = new int[]{1,1};
+	
     public static int atIndex(int i) throws IllegalArgumentException 
     {
     	
@@ -34,14 +37,15 @@ public class Fibonacci {
     		return 1;
     	else
     	{
-    		//int num = 2;
-    		int[] seq = {1,1};
-    		for(int k = 1; k < i; k++)
+    		if(i>=sequence.length)
     		{
-    			seq = Arrays.copyOf(seq, seq.length+1);
-    			seq[seq.length-1] = seq[seq.length-3] + seq[seq.length-2];
+    			for(int k = sequence.length; k <= i; k++)		//k isn't used during the loop; we know that we need to iterate i-(sequence.length) times to make the array get to position i
+    			{
+    				sequence = Arrays.copyOf(sequence, sequence.length+1);
+    				sequence[sequence.length-1] = sequence[sequence.length-3] + sequence[sequence.length-2];
+    			}
     		}
-    		return seq[i];
+    		return sequence[i];
     	}
     	
     }
