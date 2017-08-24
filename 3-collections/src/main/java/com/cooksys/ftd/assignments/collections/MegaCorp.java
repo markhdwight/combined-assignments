@@ -3,12 +3,17 @@ package com.cooksys.ftd.assignments.collections;
 import com.cooksys.ftd.assignments.collections.hierarchy.Hierarchy;
 import com.cooksys.ftd.assignments.collections.model.Capitalist;
 import com.cooksys.ftd.assignments.collections.model.FatCat;
+import com.cooksys.ftd.assignments.collections.model.WageSlave;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
-
+	
+	private HashMap<FatCat,HashSet<Capitalist>> corpStructure = new HashMap<FatCat,HashSet<Capitalist>>();
+	private HashSet<Capitalist> capSet = new HashSet<Capitalist>();
+	
     /**
      * Adds a given element to the hierarchy.
      * <p>
@@ -29,7 +34,28 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public boolean add(Capitalist capitalist) {
-        throw new NotImplementedException();
+        
+    	if(capitalist != null)
+    	{	
+    		if(capSet.contains(capitalist))
+    			return false;
+    		if(capitalist.hasParent())
+    		{
+    			capitalist.getParent().addChild(capitalist);
+    			add(capitalist.getParent());
+    			return capSet.add(capitalist);
+    		}
+    		else
+    		{
+    			if(capitalist instanceof WageSlave)
+    				return false;
+    			else 
+    			{
+    				return capSet.add(capitalist);
+    			}
+    		}
+    	}
+    	return false;
     }
 
     /**
@@ -38,7 +64,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public boolean has(Capitalist capitalist) {
-        throw new NotImplementedException();
+    	return capSet.contains(capitalist);
     }
 
     /**
@@ -47,7 +73,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<Capitalist> getElements() {
-        throw new NotImplementedException();
+    	HashSet<Capitalist> tempSet = new HashSet(capSet);
+        return tempSet;
     }
 
     /**
@@ -56,7 +83,35 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<FatCat> getParents() {
-        throw new NotImplementedException();
+    	HashSet<FatCat> tempSet = new HashSet<FatCat>();;
+    	for(Capitalist c : capSet)
+    	{
+    		if(c instanceof FatCat)
+    		{
+    			tempSet.add((FatCat)c);
+    		}
+//    		if(!(c instanceof WageSlave))
+//    		{
+//    			if(((FatCat)c).hasChildren())
+//    			{
+//    				childrenExist = true;
+//    				tempSet.add((FatCat)c);
+//    			}
+//    		}   	
+    	}
+    	
+//    	if(!childrenExist)
+//    	{
+//    		//System.out.println("THERE WERE NO CHILDREN");
+//    		for(Capitalist c : capSet)
+//    		{
+//    			//if(c instanceof FatCat)
+//    				tempSet.add((FatCat)c);
+//    		}
+//    	}
+    	
+    	
+    	return tempSet;
     }
 
     /**
@@ -67,7 +122,15 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<Capitalist> getChildren(FatCat fatCat) {
-        throw new NotImplementedException();
+
+    	FatCat temp = new FatCat(new String(fatCat.getName()),new Integer(fatCat.getSalary()),(fatCat.getParent()));
+
+    	HashSet<Capitalist> tempSet = new HashSet<Capitalist>(); 
+    	for(Capitalist c : fatCat.getChildren())
+    	{
+    		tempSet.add(c);
+    	}
+    	return tempSet;
     }
 
     /**
@@ -77,7 +140,38 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Map<FatCat, Set<Capitalist>> getHierarchy() {
-        throw new NotImplementedException();
+
+    	HashMap<FatCat,Set<Capitalist>> tempMap = new HashMap<FatCat,Set<Capitalist>>();
+    	HashSet<Capitalist> tempSet = new HashSet(capSet);
+    	
+    	FatCat tempCat;
+
+    	for(Capitalist c : capSet)
+    	{
+    		if(!(c instanceof WageSlave))
+    		{
+    			//if(!((FatCat)c).hasParent())
+    			//{
+    				//tempSet.remove(c);
+    				tempMap.put((FatCat)c, new HashSet<Capitalist>());		
+    				for(Capitalist e : getChildren((FatCat)c))
+    					tempMap.get(c).add(e);
+    			//}
+    		}
+    	}
+//    	for(Capitalist c : tempSet)
+//    	{
+//    		if(c.hasParent())
+//    		{
+//    			for(Capitalist d : tempMap.keySet()){
+//    				if(d.equals( c.getParent()))
+//    					tempMap.get(d).add(c);
+//    			}
+//    		}
+//    		
+//    	}
+    	
+    	return tempMap;
     }
 
     /**
@@ -88,6 +182,43 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public List<FatCat> getParentChain(Capitalist capitalist) {
-        throw new NotImplementedException();
+
+    	ArrayList<FatCat> pChain = new ArrayList<FatCat>();
+    	
+    	if(capitalist != null)
+    	{
+    		Capitalist tempCap = capitalist;
+    	
+    	
+    		while(tempCap.hasParent())
+    		{
+    			if(inHierarchy(tempCap.getParent()))
+    			{
+    				pChain.add(tempCap.getParent());
+    				tempCap = tempCap.getParent();
+    			}
+    			else break;
+    		}
+    	}
+    	return pChain;
     }
+    
+    private boolean inHierarchy(Capitalist capitalist)
+    {
+    	Map<FatCat, Set<Capitalist>> hierarchy = getHierarchy();
+    	
+    	if(hierarchy.keySet().contains(capitalist))
+    		return true;
+    	else
+    	{
+    		for(Capitalist c : hierarchy.keySet())
+    		{
+    			if(hierarchy.get(c).contains(capitalist))
+    				return true;
+    		}
+    	}
+    	
+    	return false;
+    }
+    
 }
