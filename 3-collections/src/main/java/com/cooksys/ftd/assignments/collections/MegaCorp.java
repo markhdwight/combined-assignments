@@ -11,7 +11,6 @@ import java.util.*;
 
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	
-	private HashMap<FatCat,HashSet<Capitalist>> corpStructure = new HashMap<FatCat,HashSet<Capitalist>>();
 	private HashSet<Capitalist> capSet = new HashSet<Capitalist>();
 	
     /**

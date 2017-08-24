@@ -52,11 +52,6 @@ public class FatCat implements Capitalist {
 		if (getClass() != obj.getClass())
 			return false;
 		FatCat other = (FatCat) obj;
-//		if (children == null) {
-//			if (other.children != null)
-//				return false;
-//		} else if (!children.equals(other.children))
-//			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
