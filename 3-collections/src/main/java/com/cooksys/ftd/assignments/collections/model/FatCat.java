@@ -24,13 +24,6 @@ public class FatCat implements Capitalist {
     	this.owner = owner;
     	children = new HashSet<Capitalist>();
     }
-    
-//    public FatCat(FatCat cat)
-//    {
-//    	String tempName = new String(cat.getName());
-//    	int tempSalary = new Integer(cat.getSalary());
-//    	FatCat tempOwner = cat.getParent();
-//    }
 
     /**
      * @return the name of the capitalist
@@ -44,7 +37,6 @@ public class FatCat implements Capitalist {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		//result = prime * result + ((children == null) ? 0 : children.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
 		result = prime * result + salary;

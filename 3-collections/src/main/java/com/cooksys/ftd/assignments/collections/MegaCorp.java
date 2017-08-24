@@ -89,28 +89,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     		if(c instanceof FatCat)
     		{
     			tempSet.add((FatCat)c);
-    		}
-//    		if(!(c instanceof WageSlave))
-//    		{
-//    			if(((FatCat)c).hasChildren())
-//    			{
-//    				childrenExist = true;
-//    				tempSet.add((FatCat)c);
-//    			}
-//    		}   	
-    	}
-    	
-//    	if(!childrenExist)
-//    	{
-//    		//System.out.println("THERE WERE NO CHILDREN");
-//    		for(Capitalist c : capSet)
-//    		{
-//    			//if(c instanceof FatCat)
-//    				tempSet.add((FatCat)c);
-//    		}
-//    	}
-    	
-    	
+    		} 	
+    	}  	
     	return tempSet;
     }
 
@@ -150,26 +130,12 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     	{
     		if(!(c instanceof WageSlave))
     		{
-    			//if(!((FatCat)c).hasParent())
-    			//{
-    				//tempSet.remove(c);
-    				tempMap.put((FatCat)c, new HashSet<Capitalist>());		
-    				for(Capitalist e : getChildren((FatCat)c))
-    					tempMap.get(c).add(e);
-    			//}
+    			tempMap.put((FatCat)c, new HashSet<Capitalist>());		
+    			for(Capitalist e : getChildren((FatCat)c))
+    				tempMap.get(c).add(e);
+    			
     		}
     	}
-//    	for(Capitalist c : tempSet)
-//    	{
-//    		if(c.hasParent())
-//    		{
-//    			for(Capitalist d : tempMap.keySet()){
-//    				if(d.equals( c.getParent()))
-//    					tempMap.get(d).add(c);
-//    			}
-//    		}
-//    		
-//    	}
     	
     	return tempMap;
     }
