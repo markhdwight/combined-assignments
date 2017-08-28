@@ -28,7 +28,7 @@ public class MarshalTester {
 		
 	}
 	
-	private static void createXML()
+	private static void createXML()		//Creates sample xml files 
 	{
 		JAXBContext jaxb;
 		Marshaller marshaller;
@@ -48,11 +48,11 @@ public class MarshalTester {
 		student.setFavoriteParadigm("Agile");
 		
 		local = new LocalConfig();
-		local.setPort(9191);
+		local.setPort(4455);
 		
 		remote = new RemoteConfig();
-		remote.setHost("localhost");
-		remote.setPort(9191);
+		remote.setHost("localhost");	//10.1.1.229 for Nick's
+		remote.setPort(4455);
 		
 		config = new Config();
 		config.setLocal(local);
@@ -78,7 +78,7 @@ public class MarshalTester {
 
 	}
 	
-	private static void testXML()
+	private static void testXML()	//verifies that the existing xml files are in the proper format by unmarshalling them and printing the contents of the objects they contain
 	{
 		JAXBContext jaxb;
 		Unmarshaller unmarshaller;

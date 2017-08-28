@@ -28,13 +28,10 @@ public class Client {
      * over the socket as xml, and should unmarshal that object before printing its details to the console.
      */
     public static void main(String[] args) {
-        // TODO
+
     	String configLoc = "./config/config.xml";
-    	String studentLoc = "./config/student.xml";
-    	String studentRawText = "";
     	File configFile = new File(configLoc);
-    	File studentFile = new File(studentLoc);
-    	FileOutputStream fileOut;
+
     	
     	Config config;
     	RemoteConfig remote;
@@ -43,7 +40,6 @@ public class Client {
     	Student student;
     	JAXBContext jaxbContext;
     	Unmarshaller unmarshaller;
-    	byte[] bytes = new byte[512];		//TODO: adjust byte size if needed?
     	   	  
     	
     	try
@@ -60,15 +56,9 @@ public class Client {
     		socket = new Socket(remote.getHost(),remote.getPort());
     		input = socket.getInputStream();
     		
-    	//receive student xml from server
-    		input.read(bytes);   		
-    		studentRawText = new String(bytes);
-    		studentRawText = studentRawText.substring(0, studentRawText.lastIndexOf('>')+1);    	//Removes trailing whitespace from the resulting file	
-    		fileOut = new FileOutputStream(studentLoc);
-    		fileOut.write(studentRawText.getBytes());	
-    		
+    	//receive student xml from server   		
     	//Unmarshall student from xml and print out its info
-    		student = (Student)unmarshaller.unmarshal(studentFile);
+    		student = (Student)unmarshaller.unmarshal(input);
     		System.out.println(student);
     		
     	//Close the connection

@@ -62,14 +62,11 @@ public class Server extends Utils {
 
     	String configLoc = "./config/config.xml";
     	String studentLoc;
-    	String tempStudentLoc = "./config/tempStudent.xml";
     	File studentFile;
-    	File tempStudentFile = new File(tempStudentLoc);
 
     	JAXBContext jaxb;
     	Marshaller marshaller;
     	Unmarshaller unmarshaller;
-    	FileInputStream fileIn;
     	
     	Config config;
     	Student student;
@@ -77,8 +74,6 @@ public class Server extends Utils {
     	OutputStream output; 
     	ServerSocket server;
     	Socket socket;
-
-    	byte[] bytes = new byte[512];		//TODO: adjust byte size if needed?
     	 
     	System.out.println("Starting server...");
     	
@@ -91,7 +86,7 @@ public class Server extends Utils {
     			jaxb = createJAXBContext();
     			config = loadConfig(configLoc,jaxb);
     			studentLoc = config.getStudentFilePath();
-    			studentFile = new File(studentLoc);
+    			studentFile = new File(studentLoc);  		
     			marshaller = jaxb.createMarshaller();
     			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
     			unmarshaller = jaxb.createUnmarshaller();
@@ -103,7 +98,6 @@ public class Server extends Utils {
     			server = new ServerSocket(local.getPort());
     			socket = server.accept();
 
-    //TODO
     		//Acknowledge connection and unmarshal the student	
     			System.out.println("Client Connection Received");
     			output = socket.getOutputStream();
@@ -112,15 +106,11 @@ public class Server extends Utils {
     			System.out.println(student);
     		
     		//re-marshal student and send the xml to client
-    			marshaller.marshal(student, tempStudentFile);
-    			fileIn = new FileInputStream(tempStudentLoc);
-    			fileIn.read(bytes);
-    			output.write(bytes);
+    			marshaller.marshal(student, output);
     			output.flush();
     			System.out.println("Student info sent");
     		
     		//Close the connection
-    			fileIn.close();
     			socket.close();
     			server.close();
     		}

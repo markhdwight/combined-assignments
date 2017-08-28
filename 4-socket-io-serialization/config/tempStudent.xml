@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<student firstName="Mark" lastName="Dwight">
-    <favorite-ide>Eclipse</favorite-ide>
-    <favorite-language>JAVA</favorite-language>
-    <favorite-paradigm>Agile</favorite-paradigm>
-</student>
